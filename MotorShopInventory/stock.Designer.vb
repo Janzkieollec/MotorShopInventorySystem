@@ -38,11 +38,12 @@ Partial Class stock
         Guna2HtmlLabel2 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         btnAdd = New Guna.UI2.WinForms.Guna2Button()
         btnUpdate = New Guna.UI2.WinForms.Guna2Button()
-        Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         stockSearch = New Guna.UI2.WinForms.Guna2TextBox()
         stockDatgrid = New Guna.UI2.WinForms.Guna2DataGridView()
-        ID = New DataGridViewTextBoxColumn()
+        stock_id = New DataGridViewTextBoxColumn()
+        stock_ids = New DataGridViewTextBoxColumn()
         product_name = New DataGridViewTextBoxColumn()
+        brand = New DataGridViewTextBoxColumn()
         description = New DataGridViewTextBoxColumn()
         Unit = New DataGridViewTextBoxColumn()
         data = New DataGridViewTextBoxColumn()
@@ -51,6 +52,7 @@ Partial Class stock
         getUnit = New Guna.UI2.WinForms.Guna2ComboBox()
         Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         getDate = New Guna.UI2.WinForms.Guna2DateTimePicker()
+        Guna2HtmlLabel5 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         CType(stockDatgrid, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -101,16 +103,6 @@ Partial Class stock
         btnUpdate.TabIndex = 20
         btnUpdate.Text = "Update Item"
         ' 
-        ' Guna2HtmlLabel1
-        ' 
-        Guna2HtmlLabel1.BackColor = Color.Transparent
-        Guna2HtmlLabel1.Font = New Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
-        Guna2HtmlLabel1.Location = New Point(377, 47)
-        Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Guna2HtmlLabel1.Size = New Size(50, 19)
-        Guna2HtmlLabel1.TabIndex = 19
-        Guna2HtmlLabel1.Text = "Search:"
-        ' 
         ' stockSearch
         ' 
         stockSearch.BorderRadius = 5
@@ -123,13 +115,13 @@ Partial Class stock
         stockSearch.FocusedState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
         stockSearch.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
         stockSearch.HoverState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
-        stockSearch.Location = New Point(428, 43)
+        stockSearch.Location = New Point(393, 43)
         stockSearch.Name = "stockSearch"
         stockSearch.PasswordChar = ChrW(0)
         stockSearch.PlaceholderText = ""
         stockSearch.SelectedText = ""
         stockSearch.ShadowDecoration.CustomizableEdges = CustomizableEdges6
-        stockSearch.Size = New Size(200, 29)
+        stockSearch.Size = New Size(235, 29)
         stockSearch.TabIndex = 18
         ' 
         ' stockDatgrid
@@ -150,7 +142,7 @@ Partial Class stock
         stockDatgrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         stockDatgrid.ColumnHeadersHeight = 36
         stockDatgrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        stockDatgrid.Columns.AddRange(New DataGridViewColumn() {ID, product_name, description, Unit, data, stocks})
+        stockDatgrid.Columns.AddRange(New DataGridViewColumn() {stock_id, stock_ids, product_name, brand, description, Unit, data, stocks})
         DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = Color.FromArgb(CByte(208), CByte(235), CByte(230))
         DataGridViewCellStyle3.Font = New Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
@@ -190,65 +182,70 @@ Partial Class stock
         stockDatgrid.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(CByte(99), CByte(191), CByte(173))
         stockDatgrid.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black
         ' 
-        ' ID
+        ' stock_id
         ' 
-        ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        ID.DataPropertyName = "id"
-        ID.HeaderText = "ID"
-        ID.Name = "ID"
-        ID.ReadOnly = True
-        ID.Width = 157
+        stock_id.DataPropertyName = "id"
+        stock_id.HeaderText = "ID"
+        stock_id.Name = "stock_id"
+        stock_id.ReadOnly = True
+        stock_id.Visible = False
+        ' 
+        ' stock_ids
+        ' 
+        stock_ids.DataPropertyName = "IDs"
+        stock_ids.HeaderText = "ID"
+        stock_ids.Name = "stock_ids"
+        stock_ids.ReadOnly = True
         ' 
         ' product_name
         ' 
-        product_name.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        product_name.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
         product_name.DataPropertyName = "product_name"
         product_name.HeaderText = "Product Name"
         product_name.Name = "product_name"
         product_name.ReadOnly = True
-        product_name.Width = 157
+        product_name.Width = 115
+        ' 
+        ' brand
+        ' 
+        brand.DataPropertyName = "brand_name"
+        brand.HeaderText = "Brand Name"
+        brand.Name = "brand"
+        brand.ReadOnly = True
         ' 
         ' description
         ' 
-        description.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
         description.DataPropertyName = "description"
         description.HeaderText = "Description"
         description.Name = "description"
         description.ReadOnly = True
-        description.Width = 103
         ' 
         ' Unit
         ' 
-        Unit.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
         Unit.DataPropertyName = "unit"
         Unit.HeaderText = "Unit"
         Unit.Name = "Unit"
         Unit.ReadOnly = True
-        Unit.Width = 55
         ' 
         ' data
         ' 
-        data.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
         data.DataPropertyName = "date"
         data.HeaderText = "Date"
         data.Name = "data"
         data.ReadOnly = True
-        data.Width = 63
         ' 
         ' stocks
         ' 
-        stocks.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
         stocks.DataPropertyName = "stocks"
         stocks.HeaderText = "Stocks"
         stocks.Name = "stocks"
         stocks.ReadOnly = True
-        stocks.Width = 71
         ' 
         ' Guna2HtmlLabel4
         ' 
         Guna2HtmlLabel4.BackColor = Color.Transparent
         Guna2HtmlLabel4.Font = New Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
-        Guna2HtmlLabel4.Location = New Point(194, 47)
+        Guna2HtmlLabel4.Location = New Point(23, 47)
         Guna2HtmlLabel4.Name = "Guna2HtmlLabel4"
         Guna2HtmlLabel4.Size = New Size(31, 19)
         Guna2HtmlLabel4.TabIndex = 26
@@ -266,17 +263,17 @@ Partial Class stock
         getUnit.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
         getUnit.ForeColor = Color.FromArgb(CByte(68), CByte(88), CByte(112))
         getUnit.ItemHeight = 22
-        getUnit.Location = New Point(231, 43)
+        getUnit.Location = New Point(60, 43)
         getUnit.Name = "getUnit"
         getUnit.ShadowDecoration.CustomizableEdges = CustomizableEdges8
-        getUnit.Size = New Size(140, 28)
+        getUnit.Size = New Size(187, 28)
         getUnit.TabIndex = 25
         ' 
         ' Guna2HtmlLabel3
         ' 
         Guna2HtmlLabel3.BackColor = Color.Transparent
         Guna2HtmlLabel3.Font = New Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
-        Guna2HtmlLabel3.Location = New Point(22, 47)
+        Guna2HtmlLabel3.Location = New Point(463, 12)
         Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
         Guna2HtmlLabel3.Size = New Size(39, 19)
         Guna2HtmlLabel3.TabIndex = 24
@@ -290,7 +287,7 @@ Partial Class stock
         getDate.FillColor = Color.LightGreen
         getDate.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
         getDate.Format = DateTimePickerFormat.Short
-        getDate.Location = New Point(67, 43)
+        getDate.Location = New Point(508, 8)
         getDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         getDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         getDate.Name = "getDate"
@@ -299,12 +296,23 @@ Partial Class stock
         getDate.TabIndex = 23
         getDate.Value = New Date(2023, 12, 30, 17, 16, 12, 574)
         ' 
+        ' Guna2HtmlLabel5
+        ' 
+        Guna2HtmlLabel5.BackColor = Color.Transparent
+        Guna2HtmlLabel5.Font = New Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
+        Guna2HtmlLabel5.Location = New Point(253, 47)
+        Guna2HtmlLabel5.Name = "Guna2HtmlLabel5"
+        Guna2HtmlLabel5.Size = New Size(134, 19)
+        Guna2HtmlLabel5.TabIndex = 27
+        Guna2HtmlLabel5.Text = "Search by Category:"
+        ' 
         ' stock
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(192), CByte(255), CByte(192))
         ClientSize = New Size(653, 471)
+        Controls.Add(Guna2HtmlLabel5)
         Controls.Add(Guna2HtmlLabel4)
         Controls.Add(getUnit)
         Controls.Add(Guna2HtmlLabel3)
@@ -312,7 +320,6 @@ Partial Class stock
         Controls.Add(Guna2HtmlLabel2)
         Controls.Add(btnAdd)
         Controls.Add(btnUpdate)
-        Controls.Add(Guna2HtmlLabel1)
         Controls.Add(stockSearch)
         Controls.Add(stockDatgrid)
         FormBorderStyle = FormBorderStyle.None
@@ -331,13 +338,17 @@ Partial Class stock
     Friend WithEvents stockSearch As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents stockDatgrid As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents Guna2HtmlLabel4 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents getUnit As Guna.UI2.WinForms.Guna2ComboBox
+    Friend WithEvents Guna2HtmlLabel3 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents getDate As Guna.UI2.WinForms.Guna2DateTimePicker
+    Friend WithEvents stock_id As DataGridViewTextBoxColumn
+    Friend WithEvents stock_ids As DataGridViewTextBoxColumn
     Friend WithEvents product_name As DataGridViewTextBoxColumn
     Friend WithEvents description As DataGridViewTextBoxColumn
     Friend WithEvents Unit As DataGridViewTextBoxColumn
     Friend WithEvents data As DataGridViewTextBoxColumn
     Friend WithEvents stocks As DataGridViewTextBoxColumn
-    Friend WithEvents Guna2HtmlLabel4 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents getUnit As Guna.UI2.WinForms.Guna2ComboBox
-    Friend WithEvents Guna2HtmlLabel3 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents getDate As Guna.UI2.WinForms.Guna2DateTimePicker
+    Friend WithEvents brand As DataGridViewTextBoxColumn
+    Friend WithEvents Guna2HtmlLabel5 As Guna.UI2.WinForms.Guna2HtmlLabel
 End Class

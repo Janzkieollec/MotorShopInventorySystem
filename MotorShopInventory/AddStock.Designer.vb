@@ -40,13 +40,11 @@ Partial Class AddStock
         Dim CustomizableEdges16 As Guna.UI2.WinForms.Suite.CustomizableEdges = New Guna.UI2.WinForms.Suite.CustomizableEdges()
         txtDate = New Guna.UI2.WinForms.Guna2DateTimePicker()
         btnAdd = New Guna.UI2.WinForms.Guna2Button()
-        txtUnit = New Guna.UI2.WinForms.Guna2TextBox()
         Guna2HtmlLabel7 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Guna2HtmlLabel4 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         txtDescription = New Guna.UI2.WinForms.Guna2TextBox()
         txtBrand = New Guna.UI2.WinForms.Guna2TextBox()
         Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
-        txtProductName = New Guna.UI2.WinForms.Guna2TextBox()
         Guna2HtmlLabel2 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
@@ -55,6 +53,8 @@ Partial Class AddStock
         Guna2HtmlLabel8 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Guna2HtmlLabel6 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         txtStock = New Guna.UI2.WinForms.Guna2TextBox()
+        txtUnit = New Guna.UI2.WinForms.Guna2ComboBox()
+        txtProductName = New Guna.UI2.WinForms.Guna2ComboBox()
         Panel1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -92,27 +92,6 @@ Partial Class AddStock
         btnAdd.TabIndex = 31
         btnAdd.Text = "Save"
         ' 
-        ' txtUnit
-        ' 
-        txtUnit.CustomizableEdges = CustomizableEdges5
-        txtUnit.DefaultText = ""
-        txtUnit.DisabledState.BorderColor = Color.FromArgb(CByte(208), CByte(208), CByte(208))
-        txtUnit.DisabledState.FillColor = Color.FromArgb(CByte(226), CByte(226), CByte(226))
-        txtUnit.DisabledState.ForeColor = Color.FromArgb(CByte(138), CByte(138), CByte(138))
-        txtUnit.DisabledState.PlaceholderForeColor = Color.FromArgb(CByte(138), CByte(138), CByte(138))
-        txtUnit.FocusedState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
-        txtUnit.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
-        txtUnit.ForeColor = Color.Black
-        txtUnit.HoverState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
-        txtUnit.Location = New Point(12, 224)
-        txtUnit.Name = "txtUnit"
-        txtUnit.PasswordChar = ChrW(0)
-        txtUnit.PlaceholderText = ""
-        txtUnit.SelectedText = ""
-        txtUnit.ShadowDecoration.CustomizableEdges = CustomizableEdges6
-        txtUnit.Size = New Size(229, 36)
-        txtUnit.TabIndex = 26
-        ' 
         ' Guna2HtmlLabel7
         ' 
         Guna2HtmlLabel7.BackColor = Color.Transparent
@@ -135,7 +114,7 @@ Partial Class AddStock
         ' 
         ' txtDescription
         ' 
-        txtDescription.CustomizableEdges = CustomizableEdges7
+        txtDescription.CustomizableEdges = CustomizableEdges5
         txtDescription.DefaultText = ""
         txtDescription.DisabledState.BorderColor = Color.FromArgb(CByte(208), CByte(208), CByte(208))
         txtDescription.DisabledState.FillColor = Color.FromArgb(CByte(226), CByte(226), CByte(226))
@@ -150,13 +129,13 @@ Partial Class AddStock
         txtDescription.PasswordChar = ChrW(0)
         txtDescription.PlaceholderText = ""
         txtDescription.SelectedText = ""
-        txtDescription.ShadowDecoration.CustomizableEdges = CustomizableEdges8
+        txtDescription.ShadowDecoration.CustomizableEdges = CustomizableEdges6
         txtDescription.Size = New Size(229, 36)
         txtDescription.TabIndex = 23
         ' 
         ' txtBrand
         ' 
-        txtBrand.CustomizableEdges = CustomizableEdges9
+        txtBrand.CustomizableEdges = CustomizableEdges7
         txtBrand.DefaultText = ""
         txtBrand.DisabledState.BorderColor = Color.FromArgb(CByte(208), CByte(208), CByte(208))
         txtBrand.DisabledState.FillColor = Color.FromArgb(CByte(226), CByte(226), CByte(226))
@@ -171,7 +150,7 @@ Partial Class AddStock
         txtBrand.PasswordChar = ChrW(0)
         txtBrand.PlaceholderText = ""
         txtBrand.SelectedText = ""
-        txtBrand.ShadowDecoration.CustomizableEdges = CustomizableEdges10
+        txtBrand.ShadowDecoration.CustomizableEdges = CustomizableEdges8
         txtBrand.Size = New Size(229, 36)
         txtBrand.TabIndex = 21
         ' 
@@ -184,27 +163,6 @@ Partial Class AddStock
         Guna2HtmlLabel3.Size = New Size(88, 19)
         Guna2HtmlLabel3.TabIndex = 20
         Guna2HtmlLabel3.Text = "Brand Name:"
-        ' 
-        ' txtProductName
-        ' 
-        txtProductName.CustomizableEdges = CustomizableEdges11
-        txtProductName.DefaultText = ""
-        txtProductName.DisabledState.BorderColor = Color.FromArgb(CByte(208), CByte(208), CByte(208))
-        txtProductName.DisabledState.FillColor = Color.FromArgb(CByte(226), CByte(226), CByte(226))
-        txtProductName.DisabledState.ForeColor = Color.FromArgb(CByte(138), CByte(138), CByte(138))
-        txtProductName.DisabledState.PlaceholderForeColor = Color.FromArgb(CByte(138), CByte(138), CByte(138))
-        txtProductName.FocusedState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
-        txtProductName.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
-        txtProductName.ForeColor = Color.Black
-        txtProductName.HoverState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
-        txtProductName.Location = New Point(12, 90)
-        txtProductName.Name = "txtProductName"
-        txtProductName.PasswordChar = ChrW(0)
-        txtProductName.PlaceholderText = ""
-        txtProductName.SelectedText = ""
-        txtProductName.ShadowDecoration.CustomizableEdges = CustomizableEdges12
-        txtProductName.Size = New Size(229, 36)
-        txtProductName.TabIndex = 19
         ' 
         ' Guna2HtmlLabel2
         ' 
@@ -229,12 +187,12 @@ Partial Class AddStock
         ' Guna2ControlBox1
         ' 
         Guna2ControlBox1.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        Guna2ControlBox1.CustomizableEdges = CustomizableEdges13
+        Guna2ControlBox1.CustomizableEdges = CustomizableEdges9
         Guna2ControlBox1.FillColor = Color.SeaGreen
         Guna2ControlBox1.IconColor = Color.Black
         Guna2ControlBox1.Location = New Point(447, 0)
         Guna2ControlBox1.Name = "Guna2ControlBox1"
-        Guna2ControlBox1.ShadowDecoration.CustomizableEdges = CustomizableEdges14
+        Guna2ControlBox1.ShadowDecoration.CustomizableEdges = CustomizableEdges10
         Guna2ControlBox1.Size = New Size(45, 29)
         Guna2ControlBox1.TabIndex = 0
         ' 
@@ -282,7 +240,7 @@ Partial Class AddStock
         ' 
         ' txtStock
         ' 
-        txtStock.CustomizableEdges = CustomizableEdges15
+        txtStock.CustomizableEdges = CustomizableEdges11
         txtStock.DefaultText = ""
         txtStock.DisabledState.BorderColor = Color.FromArgb(CByte(208), CByte(208), CByte(208))
         txtStock.DisabledState.FillColor = Color.FromArgb(CByte(226), CByte(226), CByte(226))
@@ -297,9 +255,44 @@ Partial Class AddStock
         txtStock.PasswordChar = ChrW(0)
         txtStock.PlaceholderText = ""
         txtStock.SelectedText = ""
-        txtStock.ShadowDecoration.CustomizableEdges = CustomizableEdges16
+        txtStock.ShadowDecoration.CustomizableEdges = CustomizableEdges12
         txtStock.Size = New Size(229, 36)
         txtStock.TabIndex = 28
+        ' 
+        ' txtUnit
+        ' 
+        txtUnit.BackColor = Color.Transparent
+        txtUnit.CustomizableEdges = CustomizableEdges13
+        txtUnit.DrawMode = DrawMode.OwnerDrawFixed
+        txtUnit.DropDownStyle = ComboBoxStyle.DropDownList
+        txtUnit.FocusedColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
+        txtUnit.FocusedState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
+        txtUnit.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        txtUnit.ForeColor = Color.FromArgb(CByte(68), CByte(88), CByte(112))
+        txtUnit.ItemHeight = 30
+        txtUnit.Items.AddRange(New Object() {"Set", "Meter ", "Liter"})
+        txtUnit.Location = New Point(12, 224)
+        txtUnit.Name = "txtUnit"
+        txtUnit.ShadowDecoration.CustomizableEdges = CustomizableEdges14
+        txtUnit.Size = New Size(229, 36)
+        txtUnit.TabIndex = 33
+        ' 
+        ' txtProductName
+        ' 
+        txtProductName.BackColor = Color.Transparent
+        txtProductName.CustomizableEdges = CustomizableEdges15
+        txtProductName.DrawMode = DrawMode.OwnerDrawFixed
+        txtProductName.DropDownStyle = ComboBoxStyle.DropDownList
+        txtProductName.FocusedColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
+        txtProductName.FocusedState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
+        txtProductName.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        txtProductName.ForeColor = Color.FromArgb(CByte(68), CByte(88), CByte(112))
+        txtProductName.ItemHeight = 30
+        txtProductName.Location = New Point(11, 90)
+        txtProductName.Name = "txtProductName"
+        txtProductName.ShadowDecoration.CustomizableEdges = CustomizableEdges16
+        txtProductName.Size = New Size(230, 36)
+        txtProductName.TabIndex = 34
         ' 
         ' AddStock
         ' 
@@ -307,17 +300,17 @@ Partial Class AddStock
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(192), CByte(255), CByte(192))
         ClientSize = New Size(492, 481)
+        Controls.Add(txtProductName)
+        Controls.Add(txtUnit)
         Controls.Add(txtDate)
         Controls.Add(btnAdd)
         Controls.Add(txtStock)
         Controls.Add(Guna2HtmlLabel6)
-        Controls.Add(txtUnit)
         Controls.Add(Guna2HtmlLabel7)
         Controls.Add(Guna2HtmlLabel4)
         Controls.Add(txtDescription)
         Controls.Add(txtBrand)
         Controls.Add(Guna2HtmlLabel3)
-        Controls.Add(txtProductName)
         Controls.Add(Guna2HtmlLabel2)
         Controls.Add(Guna2HtmlLabel5)
         Controls.Add(Panel1)
@@ -333,13 +326,11 @@ Partial Class AddStock
 
     Friend WithEvents txtDate As Guna.UI2.WinForms.Guna2DateTimePicker
     Friend WithEvents btnAdd As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents txtUnit As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Guna2HtmlLabel7 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel4 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents txtDescription As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents txtBrand As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Guna2HtmlLabel3 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents txtProductName As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Guna2HtmlLabel2 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
@@ -348,4 +339,6 @@ Partial Class AddStock
     Friend WithEvents Guna2HtmlLabel8 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel6 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents txtStock As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents txtUnit As Guna.UI2.WinForms.Guna2ComboBox
+    Friend WithEvents txtProductName As Guna.UI2.WinForms.Guna2ComboBox
 End Class

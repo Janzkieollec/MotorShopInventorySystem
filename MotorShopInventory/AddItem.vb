@@ -1,39 +1,62 @@
 ﻿
 Imports System.Net
 Imports MySql.Data.MySqlClient
+Imports Mysqlx.XDevAPI.Relational
 
 Public Class AddItem
     Dim connString As String = "datasource=localhost;port=3306;username=root;password=;database=motorshop_db;"
+
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Using conn As New MySqlConnection(connString)
             Try
                 conn.Open()
 
-                Dim selectedStock As String = txtProductName.SelectedItem.ToString()
-                Dim stockId As Integer = GetStockId(selectedStock, conn)
-
-                ' Check if the selected product is out of stock
-                If IsOutOfStock(stockId, conn) Then
-                    MessageBox.Show("This product is currently out of stock. Cannot add it to inventory.", "Out of Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return ' Exit the event handler without adding the item
+                ' Check if the product already exists
+                If ProductExists(txtProduct.Text, conn) Then
+                    MessageBox.Show("Product already exists.")
+                    Return
                 End If
 
-                ' If the product is in stock, proceed with the insertion
-                Dim query As String = "INSERT INTO motorshop_db.products (stock_id, price, quantity, date) VALUES (@value1, @value2, @value3, @value4)"
-                Dim cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@value1", stockId)
-                cmd.Parameters.AddWithValue("@value2", txtPrice.Text)
-                cmd.Parameters.AddWithValue("@value3", txtQuantity.Text)
-                cmd.Parameters.AddWithValue("@value4", txtDate.Value)
+                ' Insert into 'products' table
+                Dim insertProductQuery As String = "INSERT INTO motorshop_db.products (product_id, product_name, brand_name, description, unit, date, status, quantity) VALUES (@value1, @value2, @value3, @value4, @value5, @value6, @value7, @value8)"
+                Using cmdInsertProduct As New MySqlCommand(insertProductQuery, conn)
+                    cmdInsertProduct.Parameters.AddWithValue("@value1", txtID.Text)
+                    cmdInsertProduct.Parameters.AddWithValue("@value2", txtProduct.Text)
+                    cmdInsertProduct.Parameters.AddWithValue("@value3", txtBrand.Text)
+                    cmdInsertProduct.Parameters.AddWithValue("@value4", txtDescription.Text)
+                    cmdInsertProduct.Parameters.AddWithValue("@value5", txtUnit.Text)
+                    cmdInsertProduct.Parameters.AddWithValue("@value6", txtDate.Value)
+                    cmdInsertProduct.Parameters.AddWithValue("@value7", txtStatus.Text)
+                    cmdInsertProduct.Parameters.AddWithValue("@value8", txtQuantity.Text)
 
-                Dim rowAffected As Integer = cmd.ExecuteNonQuery()
+                    Dim rowAffectedProduct As Integer = cmdInsertProduct.ExecuteNonQuery()
 
-                If rowAffected > 0 Then
-                    UpdateStockQuantity(stockId, Convert.ToInt32(txtQuantity.Text), conn)
-                    MessageBox.Show("Product successfully created!")
-                Else
-                    MessageBox.Show("Data insertion failed.")
-                End If
+                    If rowAffectedProduct > 0 Then
+                        ' Product successfully created, now get the product ID
+                        Dim productID As Integer = GetProductID(txtID.Text, conn)
+
+                        ' Continue with inserting into 'vew_products' table
+                        If productID <> -1 Then
+                            Dim insertVewProductQuery As String = "INSERT INTO motorshop_db.vew_products (product_id, date, quantity, status) VALUES (@value1, @value2, @value3, @value4)"
+                            Using cmdInsertVewProduct As New MySqlCommand(insertVewProductQuery, conn)
+                                cmdInsertVewProduct.Parameters.AddWithValue("@value1", productID)
+                                cmdInsertVewProduct.Parameters.AddWithValue("@value2", txtDate.Value)
+                                cmdInsertVewProduct.Parameters.AddWithValue("@value3", txtQuantity.Text)
+                                cmdInsertVewProduct.Parameters.AddWithValue("@value4", txtStatus.Text)
+
+                                Dim rowAffectedVewProduct As Integer = cmdInsertVewProduct.ExecuteNonQuery()
+
+                                If rowAffectedVewProduct > 0 Then
+                                    MessageBox.Show("Product successfully created!")
+                                Else
+                                    MessageBox.Show("Error inserting into vew_product table.")
+                                End If
+                            End Using
+                        End If
+                    Else
+                        MessageBox.Show("Error inserting into products table.")
+                    End If
+                End Using
             Catch ex As Exception
                 MessageBox.Show("An error occurred: " & ex.Message)
             Finally
@@ -41,6 +64,48 @@ Public Class AddItem
             End Try
         End Using
     End Sub
+
+    Private Function ProductExists(productName As String, connection As MySqlConnection) As Boolean
+        ' Check if the product already exists in the products table based on product_name
+        Dim checkQuery As String = "SELECT COUNT(*) FROM motorshop_db.products WHERE product_name = @value1"
+        Using checkCmd As New MySqlCommand(checkQuery, connection)
+            checkCmd.Parameters.AddWithValue("@value1", productName)
+
+            Dim existingCount As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
+
+            Return existingCount > 0
+        End Using
+    End Function
+
+
+
+    Private Function GetProductID(productID As String, connection As MySqlConnection) As Integer
+        Try
+            ' Query the product_id based on the given product ID
+            Dim query As String = "SELECT id FROM motorshop_db.products WHERE product_id = @productID"
+            Using cmd As New MySqlCommand(query, connection)
+                cmd.Parameters.AddWithValue("@productID", productID)
+
+                Dim result As Object = cmd.ExecuteScalar()
+
+                ' Check if the result is not DBNull and convert it to an Integer
+                If result IsNot DBNull.Value AndAlso result IsNot Nothing Then
+                    Return Convert.ToInt32(result)
+                Else
+                    ' Handle the case where product_id is not found
+                    MessageBox.Show("Product ID not found for the specified ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End Using
+        Catch ex As Exception
+            ' Handle any other exceptions
+            MessageBox.Show("Error retrieving product_id: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+        ' Return a default value if the retrieval fails
+        Return -1
+    End Function
+
+
 
     Private Function IsOutOfStock(stockId As Integer, connection As MySqlConnection) As Boolean
         Try
@@ -109,9 +174,23 @@ Public Class AddItem
 
     Private Sub AddItem_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtDate.Value = DateAndTime.Today
-        LoadStockComboBox()
+        GenerateProductId()
     End Sub
 
+    Private Sub GenerateProductId()
+        ' Get the current date and time
+        Dim currentDate As String = DateAndTime.Today.ToString("yyyyMMdd")
+
+        ' Generate a random number (you may use a more robust method depending on your requirements)
+        Dim random As New Random()
+        Dim randomSuffix As Integer = random.Next(1000, 9999)
+
+        ' Combine the date and random number to create the product ID
+        Dim productId As String = currentDate & randomSuffix.ToString()
+
+        ' Set the generated product ID in the txtID.Text control
+        txtID.Text = productId
+    End Sub
     Private Sub LoadStockComboBox()
         Using conn As New MySqlConnection(connString)
             Try
@@ -144,49 +223,6 @@ Public Class AddItem
                 End If
             End Try
         End Using
-    End Sub
-
-    Private Sub txtProductName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtProductName.SelectedIndexChanged
-        ' Check if an item is selected in the ComboBox
-        If txtProductName.SelectedIndex <> -1 Then
-            Using conn As New MySqlConnection(connString)
-                Try
-                    ' Open the connection only when needed
-                    If conn.State = ConnectionState.Closed Then
-                        conn.Open()
-                    End If
-
-                    ' Query to retrieve details of the selected product from the 'stocks' table
-                    Dim query As String = "SELECT * FROM motorshop_db.stocks WHERE product_name = @productName"
-                    Using cmd As New MySqlCommand(query, conn)
-                        cmd.Parameters.AddWithValue("@productName", txtProductName.SelectedItem.ToString())
-
-                        Using reader As MySqlDataReader = cmd.ExecuteReader()
-                            ' Check if the product details are available
-                            If reader.Read() Then
-                                ' Populate text fields with product details
-                                txtBrand.Text = reader("brand_name").ToString()
-                                txtDescription.Text = reader("description").ToString()
-                                txtUnit.Text = reader("unit").ToString()
-
-                                ' Check if the product is out of stock
-                                Dim availableStock As Integer = Convert.ToInt32(reader("stocks"))
-                                If availableStock <= 0 Then
-                                    MessageBox.Show("This product is currently out of stock.", "Out of Stock", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                                End If
-                            End If
-                        End Using
-                    End Using
-                Catch ex As Exception
-                    MessageBox.Show("Error loading product details: " & ex.Message)
-                Finally
-                    ' Close the connection if it was opened
-                    If conn.State = ConnectionState.Open Then
-                        conn.Close()
-                    End If
-                End Try
-            End Using
-        End If
     End Sub
 
 

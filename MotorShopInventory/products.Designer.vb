@@ -38,20 +38,21 @@ Partial Class products
         Guna2HtmlLabel2 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         btnAdd = New Guna.UI2.WinForms.Guna2Button()
         btnUpdate = New Guna.UI2.WinForms.Guna2Button()
-        Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         productSearch = New Guna.UI2.WinForms.Guna2TextBox()
         productDatgrid = New Guna.UI2.WinForms.Guna2DataGridView()
-        ids = New DataGridViewTextBoxColumn()
-        brand = New DataGridViewTextBoxColumn()
-        productname = New DataGridViewTextBoxColumn()
-        description = New DataGridViewTextBoxColumn()
-        units = New DataGridViewTextBoxColumn()
-        dated = New DataGridViewTextBoxColumn()
-        quantity = New DataGridViewTextBoxColumn()
         getDate = New Guna.UI2.WinForms.Guna2DateTimePicker()
         Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
-        getUnit = New Guna.UI2.WinForms.Guna2ComboBox()
+        getBrand = New Guna.UI2.WinForms.Guna2ComboBox()
         Guna2HtmlLabel4 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        product_id = New DataGridViewTextBoxColumn()
+        row = New DataGridViewTextBoxColumn()
+        productname = New DataGridViewTextBoxColumn()
+        brand = New DataGridViewTextBoxColumn()
+        description = New DataGridViewTextBoxColumn()
+        unit = New DataGridViewTextBoxColumn()
+        dateds = New DataGridViewTextBoxColumn()
+        Availability = New DataGridViewTextBoxColumn()
         CType(productDatgrid, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -101,16 +102,6 @@ Partial Class products
         btnUpdate.TabIndex = 14
         btnUpdate.Text = "Update Item"
         ' 
-        ' Guna2HtmlLabel1
-        ' 
-        Guna2HtmlLabel1.BackColor = Color.Transparent
-        Guna2HtmlLabel1.Font = New Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
-        Guna2HtmlLabel1.Location = New Point(379, 47)
-        Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Guna2HtmlLabel1.Size = New Size(50, 19)
-        Guna2HtmlLabel1.TabIndex = 13
-        Guna2HtmlLabel1.Text = "Search:"
-        ' 
         ' productSearch
         ' 
         productSearch.BorderRadius = 5
@@ -123,13 +114,13 @@ Partial Class products
         productSearch.FocusedState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
         productSearch.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
         productSearch.HoverState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
-        productSearch.Location = New Point(430, 43)
+        productSearch.Location = New Point(399, 43)
         productSearch.Name = "productSearch"
         productSearch.PasswordChar = ChrW(0)
         productSearch.PlaceholderText = ""
         productSearch.SelectedText = ""
         productSearch.ShadowDecoration.CustomizableEdges = CustomizableEdges6
-        productSearch.Size = New Size(200, 29)
+        productSearch.Size = New Size(230, 29)
         productSearch.TabIndex = 12
         ' 
         ' productDatgrid
@@ -151,7 +142,7 @@ Partial Class products
         productDatgrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         productDatgrid.ColumnHeadersHeight = 36
         productDatgrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        productDatgrid.Columns.AddRange(New DataGridViewColumn() {ids, brand, productname, description, units, dated, quantity})
+        productDatgrid.Columns.AddRange(New DataGridViewColumn() {product_id, row, productname, brand, description, unit, dateds, Availability})
         DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = Color.FromArgb(CByte(208), CByte(235), CByte(230))
         DataGridViewCellStyle3.Font = New Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
@@ -191,62 +182,6 @@ Partial Class products
         productDatgrid.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(CByte(99), CByte(191), CByte(173))
         productDatgrid.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black
         ' 
-        ' ids
-        ' 
-        ids.DataPropertyName = "id"
-        ids.HeaderText = "ID"
-        ids.Name = "ids"
-        ids.ReadOnly = True
-        ids.Width = 44
-        ' 
-        ' brand
-        ' 
-        brand.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        brand.DataPropertyName = "brand_name"
-        brand.HeaderText = "Brand Name"
-        brand.Name = "brand"
-        brand.ReadOnly = True
-        ' 
-        ' productname
-        ' 
-        productname.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        productname.DataPropertyName = "product_name"
-        productname.HeaderText = "Product Name"
-        productname.Name = "productname"
-        productname.ReadOnly = True
-        ' 
-        ' description
-        ' 
-        description.DataPropertyName = "description"
-        description.HeaderText = "Description"
-        description.Name = "description"
-        description.ReadOnly = True
-        description.Width = 103
-        ' 
-        ' units
-        ' 
-        units.DataPropertyName = "unit"
-        units.HeaderText = "Unit"
-        units.Name = "units"
-        units.ReadOnly = True
-        units.Width = 55
-        ' 
-        ' dated
-        ' 
-        dated.DataPropertyName = "date"
-        dated.HeaderText = "Date"
-        dated.Name = "dated"
-        dated.ReadOnly = True
-        dated.Width = 63
-        ' 
-        ' quantity
-        ' 
-        quantity.DataPropertyName = "quantity"
-        quantity.HeaderText = "Quantity"
-        quantity.Name = "quantity"
-        quantity.ReadOnly = True
-        quantity.Width = 86
-        ' 
         ' getDate
         ' 
         getDate.BorderRadius = 5
@@ -255,7 +190,7 @@ Partial Class products
         getDate.FillColor = Color.LightGreen
         getDate.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
         getDate.Format = DateTimePickerFormat.Short
-        getDate.Location = New Point(69, 43)
+        getDate.Location = New Point(510, 8)
         getDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         getDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         getDate.Name = "getDate"
@@ -268,39 +203,115 @@ Partial Class products
         ' 
         Guna2HtmlLabel3.BackColor = Color.Transparent
         Guna2HtmlLabel3.Font = New Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
-        Guna2HtmlLabel3.Location = New Point(24, 47)
+        Guna2HtmlLabel3.Location = New Point(465, 12)
         Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
         Guna2HtmlLabel3.Size = New Size(39, 19)
         Guna2HtmlLabel3.TabIndex = 18
         Guna2HtmlLabel3.Text = "Date:"
         ' 
-        ' getUnit
+        ' getBrand
         ' 
-        getUnit.BackColor = Color.Transparent
-        getUnit.BorderRadius = 5
-        getUnit.CustomizableEdges = CustomizableEdges9
-        getUnit.DrawMode = DrawMode.OwnerDrawFixed
-        getUnit.DropDownStyle = ComboBoxStyle.DropDownList
-        getUnit.FocusedColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
-        getUnit.FocusedState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
-        getUnit.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        getUnit.ForeColor = Color.FromArgb(CByte(68), CByte(88), CByte(112))
-        getUnit.ItemHeight = 22
-        getUnit.Location = New Point(233, 43)
-        getUnit.Name = "getUnit"
-        getUnit.ShadowDecoration.CustomizableEdges = CustomizableEdges10
-        getUnit.Size = New Size(140, 28)
-        getUnit.TabIndex = 19
+        getBrand.BackColor = Color.Transparent
+        getBrand.BorderRadius = 5
+        getBrand.CustomizableEdges = CustomizableEdges9
+        getBrand.DrawMode = DrawMode.OwnerDrawFixed
+        getBrand.DropDownStyle = ComboBoxStyle.DropDownList
+        getBrand.FocusedColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
+        getBrand.FocusedState.BorderColor = Color.FromArgb(CByte(94), CByte(148), CByte(255))
+        getBrand.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        getBrand.ForeColor = Color.FromArgb(CByte(68), CByte(88), CByte(112))
+        getBrand.ItemHeight = 22
+        getBrand.Location = New Point(73, 43)
+        getBrand.Name = "getBrand"
+        getBrand.ShadowDecoration.CustomizableEdges = CustomizableEdges10
+        getBrand.Size = New Size(180, 28)
+        getBrand.TabIndex = 19
         ' 
         ' Guna2HtmlLabel4
         ' 
         Guna2HtmlLabel4.BackColor = Color.Transparent
         Guna2HtmlLabel4.Font = New Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
-        Guna2HtmlLabel4.Location = New Point(196, 47)
+        Guna2HtmlLabel4.Location = New Point(23, 46)
         Guna2HtmlLabel4.Name = "Guna2HtmlLabel4"
-        Guna2HtmlLabel4.Size = New Size(31, 19)
+        Guna2HtmlLabel4.Size = New Size(44, 19)
         Guna2HtmlLabel4.TabIndex = 20
-        Guna2HtmlLabel4.Text = "Unit:"
+        Guna2HtmlLabel4.Text = "Brand:"
+        ' 
+        ' Guna2HtmlLabel1
+        ' 
+        Guna2HtmlLabel1.BackColor = Color.Transparent
+        Guna2HtmlLabel1.Font = New Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
+        Guna2HtmlLabel1.Location = New Point(259, 46)
+        Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
+        Guna2HtmlLabel1.Size = New Size(134, 19)
+        Guna2HtmlLabel1.TabIndex = 13
+        Guna2HtmlLabel1.Text = "Search by Category:"
+        ' 
+        ' product_id
+        ' 
+        product_id.DataPropertyName = "id"
+        product_id.HeaderText = "product_id"
+        product_id.Name = "product_id"
+        product_id.ReadOnly = True
+        product_id.Visible = False
+        product_id.Width = 102
+        ' 
+        ' row
+        ' 
+        row.DataPropertyName = "IDs"
+        row.HeaderText = "ID"
+        row.Name = "row"
+        row.ReadOnly = True
+        row.Width = 44
+        ' 
+        ' productname
+        ' 
+        productname.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        productname.DataPropertyName = "product_name"
+        productname.HeaderText = "Product Name"
+        productname.Name = "productname"
+        productname.ReadOnly = True
+        ' 
+        ' brand
+        ' 
+        brand.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        brand.DataPropertyName = "brand_name"
+        brand.HeaderText = "Brand Name"
+        brand.Name = "brand"
+        brand.ReadOnly = True
+        ' 
+        ' description
+        ' 
+        description.DataPropertyName = "description"
+        description.HeaderText = "Description"
+        description.Name = "description"
+        description.ReadOnly = True
+        description.Width = 103
+        ' 
+        ' unit
+        ' 
+        unit.DataPropertyName = "unit"
+        unit.HeaderText = "Unit"
+        unit.Name = "unit"
+        unit.ReadOnly = True
+        unit.Width = 55
+        ' 
+        ' dateds
+        ' 
+        dateds.DataPropertyName = "date"
+        dateds.HeaderText = "Date"
+        dateds.Name = "dateds"
+        dateds.ReadOnly = True
+        dateds.Width = 63
+        ' 
+        ' Availability
+        ' 
+        Availability.DataPropertyName = "available_stocks"
+        Availability.HeaderText = "Available Stock"
+        Availability.Name = "Availability"
+        Availability.ReadOnly = True
+        Availability.Visible = False
+        Availability.Width = 120
         ' 
         ' products
         ' 
@@ -309,7 +320,7 @@ Partial Class products
         BackColor = Color.FromArgb(CByte(192), CByte(255), CByte(192))
         ClientSize = New Size(653, 471)
         Controls.Add(Guna2HtmlLabel4)
-        Controls.Add(getUnit)
+        Controls.Add(getBrand)
         Controls.Add(Guna2HtmlLabel3)
         Controls.Add(getDate)
         Controls.Add(Guna2HtmlLabel2)
@@ -330,24 +341,30 @@ Partial Class products
     Friend WithEvents Guna2HtmlLabel2 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents btnAdd As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents btnUpdate As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents productSearch As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents productDatgrid As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents product_name As DataGridViewTextBoxColumn
     Friend WithEvents product As DataGridViewTextBoxColumn
-    Friend WithEvents unit As DataGridViewTextBoxColumn
     Friend WithEvents data As DataGridViewTextBoxColumn
-    Friend WithEvents ids As DataGridViewTextBoxColumn
-    Friend WithEvents brand As DataGridViewTextBoxColumn
-    Friend WithEvents productname As DataGridViewTextBoxColumn
-    Friend WithEvents description As DataGridViewTextBoxColumn
-    Friend WithEvents units As DataGridViewTextBoxColumn
-    Friend WithEvents dated As DataGridViewTextBoxColumn
-    Friend WithEvents quantity As DataGridViewTextBoxColumn
     Friend WithEvents getDate As Guna.UI2.WinForms.Guna2DateTimePicker
     Friend WithEvents Guna2HtmlLabel3 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2ComboBox1 As Guna.UI2.WinForms.Guna2ComboBox
     Friend WithEvents Guna2HtmlLabel4 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents getUnit As Guna.UI2.WinForms.Guna2ComboBox
+    Friend WithEvents getBrand As Guna.UI2.WinForms.Guna2ComboBox
+    Friend WithEvents quantity As DataGridViewTextBoxColumn
+    Friend WithEvents ids As DataGridViewTextBoxColumn
+    Friend WithEvents units As DataGridViewTextBoxColumn
+    Friend WithEvents dated As DataGridViewTextBoxColumn
+    Friend WithEvents status As DataGridViewTextBoxColumn
+    Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents product_id As DataGridViewTextBoxColumn
+    Friend WithEvents row As DataGridViewTextBoxColumn
+    Friend WithEvents productname As DataGridViewTextBoxColumn
+    Friend WithEvents brand As DataGridViewTextBoxColumn
+    Friend WithEvents description As DataGridViewTextBoxColumn
+    Friend WithEvents unit As DataGridViewTextBoxColumn
+    Friend WithEvents dateds As DataGridViewTextBoxColumn
+    Friend WithEvents availabel As DataGridViewTextBoxColumn
+    Friend WithEvents Availability As DataGridViewTextBoxColumn
 End Class

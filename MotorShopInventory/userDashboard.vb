@@ -16,14 +16,13 @@ Public Class userDashboard
 
                 ' Load product data into the product DataGridView
                 Dim productDataTable As New DataTable()
-                Dim productSelectQuery As String = "SELECT p.id, s.product_name FROM motorshop_db.products p INNER JOIN motorshop_db.stocks s ON p.stock_id = s.id  WHERE DATE(p.date) = CURDATE()"
+                Dim productSelectQuery As String = "SELECT id, product_name FROM motorshop_db.products WHERE DATE(date) = CURDATE()"
                 Using productAdapter As New MySqlDataAdapter(productSelectQuery, conn)
                     productAdapter.Fill(productDataTable)
                 End Using
 
                 ' Set the DataSource outside of the 'Using' block to avoid issues with disposing the adapter
                 productDatagrid.DataSource = productDataTable
-
 
             Catch ex As Exception
                 MessageBox.Show("Error loading data: " & ex.Message)

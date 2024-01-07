@@ -74,6 +74,12 @@ Public Class home
 
     Private Sub btnProduct_Click(sender As Object, e As EventArgs) Handles btnProduct.Click
         childForm(products)
+
+
+        If TypeOf mainPanel.Controls(0) Is products Then
+            DirectCast(mainPanel.Controls(0), products).refresh()
+        End If
+
         dropdown.Visible = False
 
     End Sub
@@ -91,6 +97,7 @@ Public Class home
 
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
         childForm(InventoryReport)
+
         dropdown.Visible = False
     End Sub
 

@@ -19,7 +19,7 @@ Public Class dashboard
 
                 ' Load product data into the product DataGridView
                 Dim productDataTable As New DataTable()
-                Dim productSelectQuery As String = "SELECT p.id, s.product_name FROM motorshop_db.products p INNER JOIN motorshop_db.stocks s ON p.stock_id = s.id  WHERE DATE(p.date) = CURDATE()"
+                Dim productSelectQuery As String = "SELECT id, product_name FROM motorshop_db.products WHERE DATE(date) = CURDATE()"
                 Using productAdapter As New MySqlDataAdapter(productSelectQuery, conn)
                     productAdapter.Fill(productDataTable)
                 End Using
@@ -30,7 +30,7 @@ Public Class dashboard
                 ' Load stock data into the stock DataGridView
                 ' Load stock data into the stock DataGridView
                 Dim stockDataTable As New DataTable()
-                Dim stockSelectQuery As String = "SELECT product_name, stocks, id FROM motorshop_db.stocks ORDER BY id"
+                Dim stockSelectQuery As String = "SELECT p.product_name, s.stocks, s.id FROM motorshop_db.stocks s INNER JOIN motorshop_db.products p ON s.product_id = p.id  ORDER BY id"
                 Using stockAdapter As New MySqlDataAdapter(stockSelectQuery, conn)
                     stockAdapter.Fill(stockDataTable)
                 End Using
@@ -95,17 +95,26 @@ Public Class dashboard
                 ' Create a MySqlCommand to execute the SQL query
                 Using cmd As New MySqlCommand("SELECT SUM(stocks) FROM motorshop_db.stocks", connection)
                     ' Execute the query and get the result
-                    Dim stocks As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                    Dim result As Object = cmd.ExecuteScalar()
 
-                    ' Display the result in a TextBox named totalStock
-                    totalStocks.Text = stocks.ToString()
-                    totalStock.Text = stocks.ToString() & " Total Stocks"
+                    If result IsNot DBNull.Value AndAlso result IsNot Nothing Then
+                        ' If result is not DBNull.Value or Nothing, convert it to an integer
+                        Dim stocks As Integer = Convert.ToInt32(result)
+
+                        ' Display the result in a TextBox named totalStock
+                        totalStocks.Text = stocks.ToString()
+                        totalStock.Text = stocks.ToString() & " Total Stocks"
+                    Else
+                        ' Handle the case when there is no stock data
+                        totalStocks.Text = "0"
+                        totalStock.Text = "0 Total Stocks"
+                    End If
                 End Using
             End Using
         Catch ex As Exception
             ' Handle any exceptions that might occur during the database operation
             MessageBox.Show("Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
     End Sub
+
 End Class
